@@ -27,7 +27,7 @@ path = Path(ENV_PATH or DEFAULT_PATH).expanduser().resolve()
 docker_compose_file = path / "docker-compose.yaml"
 server_config_file = path / "app-data" / "server-config.yaml"
 dot_env_file = path / ".env"
-base_command = ["docker-compose", "-f", docker_compose_file]
+base_command = ["sudo", "-E", "docker", "compose", "-f", docker_compose_file]
 rm_rf = ["rm", "-rf"]
 
 
