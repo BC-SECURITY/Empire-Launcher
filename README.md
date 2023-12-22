@@ -34,8 +34,31 @@ curl -sSL https://raw.githubusercontent.com/BC-SECURITY/Empire-Launcher/dev/inst
 ```
 
 Type `empire` to see the help menu
+```
+usage: empire [-h] {up,down,destroy,server,client,use} ...
+
+Empire Launcher v0.0.1
+Docker Compose File: /Users/vinnybod/.empire/docker-compose.yaml
+
+positional arguments:
+  {up,down,destroy,server,client,use}
+                        Available commands
+    up                  Raise the empire
+    down                Lower the empire
+    destroy             Destroy the empire
+    server              Server-related commands
+    client              Client-related commands
+    use                 Change the Empire version
+
+optional arguments:
+  -h, --help            show this help message and exit
+```
 
 `empire up` to start the server!
+![](./empire_up.gif)
+
+## Caveats
+* There is a set list of ports that are bound to the host. You change this list by modifying `~/.empire/docker-compose.yaml`
 
 ## Goal
 
@@ -61,6 +84,14 @@ Then a plethora of commands will be available to the user (Not all of these are 
 * `empire use version 5.8.0` - Changes the version of Empire that is running (by docker tag)
 * `empire server attach` - Attaches to the running server container with a bash session
 
+## Architecture
+
+* The docker-compose file creates a Docker volume for the mysql db to persist data between runs.
+* The docker-compose file binds the empire data directories to the host's `~/.empire/app-data` directory.
+* This allows the user to modify the `~/.empire/server-config.yml` and other files without having to rebuild the image.
+* It also allows the files to persist between runs.
+
+
 ## Bring your own container
 This will only work with the 5.8.4 container or higher.
 It will only run with the public build of Empire/Starkiller.
@@ -81,14 +112,3 @@ ssh-add ~/.ssh/id_ed25519
 
 docker buildx build --ssh default=$SSH_AUTH_SOCK -t bcsecurity/empire .
 ```
-
-## Issues
-* The first call to `empire` after installing the binary fails. The second call succeeds. Not sure why.
-* There is a set list of ports that are bound to the host. You change this list by modifying `~/.empire/docker-compose.yaml`
-
-## Architecture
-
-The docker-compose file creates a Docker volume for the mysql db to persist data between runs.
-The docker-compose file binds the empire data directories to the host's ~/.empire/app-data directory.
-This allows the user to modify the server-config.yml and other files without having to rebuild the image.
-It also allows the files to persist between runs.
