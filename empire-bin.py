@@ -36,18 +36,6 @@ def main():
         printr(f"Docker compose file not found at {docker_compose_file}.")
         exit(1)
 
-    # * `empire` - Prints the help menu
-    # * `empire -h` - Prints the help menu
-    # * `empire up` - Starts the Empire server and mysql db
-    # * `empire down` - Stops the Empire server and mysql db
-    # * `empire destroy` - Stops the Empire server and mysql db and removes the data
-    # * `empire server logs` - Prints the logs from the Empire server
-    # * `empire server logs -f` - Prints the logs from the Empire server and mysql db and follows them
-    # * `empire database logs` - Prints the logs from the mysql db
-    # * `empire client` - Starts the Empire client, attached to the running server container
-    # * `empire database dump` - Dumps the mysql database to the host's ~/.empire/app-data directory
-    # * `empire use version 5.8.0` - Changes the version of Empire that is running (by docker tag)
-
     parser = argparse.ArgumentParser(
         description=dedent(
             f"""
@@ -60,13 +48,13 @@ def main():
 
     subparsers = parser.add_subparsers(help="Available commands")
 
-    parser_up = subparsers.add_parser("up", help="Raise the empire")
+    parser_up = subparsers.add_parser("up", help="Starts the Empire server and mysql db")
     parser_up.set_defaults(func=empire_up)
 
-    parser_down = subparsers.add_parser("down", help="Lower the empire")
+    parser_down = subparsers.add_parser("down", help="Stops the Empire server and mysql db")
     parser_down.set_defaults(func=empire_down)
 
-    parser_destroy = subparsers.add_parser("destroy", help="Destroy the empire")
+    parser_destroy = subparsers.add_parser("destroy", help="Stops the Empire server and mysql db and removes the data")
     parser_destroy.set_defaults(func=empire_destroy)
 
     # empire server

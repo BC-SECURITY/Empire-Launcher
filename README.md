@@ -43,9 +43,9 @@ Docker Compose File: /Users/vinnybod/.empire/docker-compose.yaml
 positional arguments:
   {up,down,destroy,server,client,use}
                         Available commands
-    up                  Raise the empire
-    down                Lower the empire
-    destroy             Destroy the empire
+    up                  Starts the Empire server and mysql db
+    down                Stops the Empire server and mysql db
+    destroy             Stops the Empire server and mysql db and removes the data
     server              Server-related commands
     client              Client-related commands
     use                 Change the Empire version
