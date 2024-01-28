@@ -1,0 +1,63 @@
+suppress-self-cert-warning: true
+database:
+  use: mysql
+  mysql:
+    url: db:3306
+    username: empire_user
+    password: empire_password
+    database_name: empire
+  sqlite:
+    location: ~/.empire/app-data/server/empire.db
+  defaults:
+    # staging key will first look at OS environment variables, then here.
+    # If empty, will be prompted (like Empire <3.7).
+    staging-key: RANDOM
+    username: empireadmin
+    password: password123
+    obfuscation:
+      - language: powershell
+        enabled: false
+        command: "Token\\All\\1"
+        module: "invoke-obfuscation"
+        preobfuscatable: true
+      - language: csharp
+        enabled: false
+        command: ""
+        module: "confuser"
+        preobfuscatable: false
+      - language: python
+        enabled: false
+        command: ""
+        module: "python-obfuscator"
+        preobfuscatable: false
+    keyword_obfuscation:
+      - Invoke-Empire
+      - Invoke-Mimikatz
+    # an IP white list to ONLY accept clients from
+    #   format is "192.168.1.1,192.168.1.10-192.168.1.100,10.0.0.0/8"
+    ip-whitelist: ""
+    # an IP black list to reject accept clients from
+    #   format is "192.168.1.1,192.168.1.10-192.168.1.100,10.0.0.0/8"
+    ip-blacklist: ""
+starkiller:
+  repo: git@github.com:BC-SECURITY/Starkiller.git
+  directory: empire/server/api/v2/starkiller
+  # Can be a branch, tag, or commit hash
+  ref: main
+  auto_update: true
+plugins:
+  # Auto-load plugin with defined settings
+  csharpserver:
+    status: start
+directories:
+  downloads: ~/.empire/app-data/server/downloads/
+  module_source: empire/server/data/module_source/
+  obfuscated_module_source: ~/.empire/app-data/server/obfuscated_module_source/
+logging:
+  level: INFO
+  directory: ~/.empire/app-data/server/logs/
+  simple_console: true
+debug:
+  last_task:
+    enabled: false
+    file: ~/.empire/app-data/server/debug/last_task.txt

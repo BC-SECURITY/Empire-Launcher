@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  empire_server:
+    restart: on-failure
+    ports:
+      - "1337:1337"
+      - "80:80"
+      - "8080:8080"
+      - "443:443"
+      - "1336:1336"
+    links:
+      - db:db
+    depends_on:
+      - db
+    image: bcsecurity/empire
+    command: ["server", "--config", "/root/.empire/app-data/server-config.yaml"]
+    volumes:
+      - "~/.empire/app-data:/root/.empire/app-data"
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_USER: 'empire_user'
+      MYSQL_PASSWORD: 'empire_password'
+      MYSQL_DATABASE: empire
+    volumes:
+     - empire-db:/var/lib/mysql
+
+volumes:
+  empire-db:
+    driver: local
