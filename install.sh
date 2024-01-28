@@ -35,9 +35,9 @@ mkdir -p ~/.empire/app-data
 
 echo "Copying files to ~/.empire"
 
-wget -O ~/.empire/docker-compose.yaml https://raw.githubusercontent.com/BC-SECURITY/Empire-Launcher/dev/docker-compose.yaml
-wget -O ~/.empire/app-data/server-config.yaml https://raw.githubusercontent.com/BC-SECURITY/Empire-Launcher/dev/server-config.yaml
-wget -O ~/.empire/empire-bin.py https://raw.githubusercontent.com/BC-SECURITY/Empire-Launcher/dev/empire-bin.py
+wget -O ~/.empire/docker-compose.yaml https://raw.githubusercontent.com/BC-SECURITY/Empire-Launcher/main/docker-compose.yaml
+wget -O ~/.empire/app-data/server-config.yaml https://raw.githubusercontent.com/BC-SECURITY/Empire-Launcher/main/server-config.yaml
+wget -O ~/.empire/empire-bin.py https://raw.githubusercontent.com/BC-SECURITY/Empire-Launcher/main/empire-bin.py
 
 sudo ln -s ~/.empire/empire-bin.py /usr/local/bin/empire
 sudo chmod 755 /usr/local/bin/empire

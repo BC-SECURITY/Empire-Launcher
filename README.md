@@ -30,7 +30,7 @@ sudo apt-get -y install curl wget
 
 Run the 1-liner install
 ```shell
-curl -sSL https://raw.githubusercontent.com/BC-SECURITY/Empire-Launcher/dev/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/BC-SECURITY/Empire-Launcher/main/install.sh | bash
 ```
 
 Type `empire` to see the help menu
